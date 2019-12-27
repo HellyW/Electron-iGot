@@ -2,12 +2,22 @@
 
 # Electron iGot
 
-* 一款聚合微信、邮箱、app推送的桌面消息管理客户端 。 基于 [Electron](https://github.com/atom/electron) 构建 。 * 
+* 一款聚合微信、邮箱、app推送的桌面消息管理客户端 。 基于 [Electron](https://github.com/atom/electron) 构建 。 
 
 api接口由[iGot开放接口](https://wahao.github.io/Bark-MP-helper/#/zh-cn/)提供。
 
-> iGot客户端是基于[iGot小程序](https://github.com/wahao/Bark-MP-helper)衍生的桌面客户端项目。您可以通过iGot轻松管理消息和您的推送方式。通过一行代码请求您就可以自定义向
+> iGot客户端是基于[iGot小程序](https://github.com/wahao/Bark-MP-helper)衍生的桌面客户端项目。您可以通过iGot轻松管理消息和您的推送方式。通过一行代码请求您就可以自定义向自己或项目组成员推送相关信息。
 >
+
+<img src="assets/qrcode.jpg" alt="logo" width="200" />
+
+## 您可以用它来做
+
+- 短信转发
+- 服务器内存、CPU预警监控、 进程监听
+- 项目业务的预警
+- 内部服务提醒
+- .....
 
 > **SPECIAL THANKS TO | 特别感谢**
 > 
