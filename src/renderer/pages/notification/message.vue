@@ -46,7 +46,7 @@
     }
     .btns{
       width: 80%;
-      margin: 20px auto 0;
+      margin: 20px auto;
       .btn{
         margin: 10px auto;
       }
@@ -65,9 +65,15 @@
       <div class="url">{{getFormatMessage.body && getFormatMessage.body.url}}</div>
       <Button type="primary" @click="openUrl(getFormatMessage.body && getFormatMessage.body.url)">打开</Button>
     </div>
+    <div style="text-align:center;padding:20px 0;">
+      <img style="width:80%" src="@/assets/code.jpg">
+      <h3>更多参数细节请扫描上方小程序查看</h3>
+    </div>
     <div class="btns">
       <Button class="btn" long type="error" size="large" @click="deleteEvent">删除该消息</Button>
     </div>
+    
+    
   </div>
 </template>
 <script>
