@@ -9,7 +9,15 @@ api接口由[iGot开放接口](https://wahao.github.io/Bark-MP-helper/#/zh-cn/)�
 > iGot客户端是基于[iGot小程序](https://github.com/wahao/Bark-MP-helper)衍生的桌面客户端项目。您可以通过iGot轻松管理消息和您的推送方式。通过一行代码请求您就可以自定义向自己或项目组成员推送相关信息。
 >
 
-<img src="assets/qrcode.jpg" alt="宣传图" width="500" />
+## 软件预览图
+
+<img src="screenshots/WX20200103-142613@2x.png" alt="通知中心" width="200" />
+
+<img src="screenshots/WX20200103-142651@2x.png" alt="授权应用" width="200" />
+
+<img src="screenshots/WX20200103-142707@2x.png" alt="推送管理" width="200" />
+
+<img src="screenshots/WX20200103-142749@2x.png" alt="关于软件" width="200" />
 
 ## 您可以用它来做
 
@@ -18,6 +26,8 @@ api接口由[iGot开放接口](https://wahao.github.io/Bark-MP-helper/#/zh-cn/)�
 - 项目业务的预警
 - 内部服务提醒
 - .....
+
+<img src="assets/qrcode.jpg" alt="宣传图" width="500" />
 
 > **SPECIAL THANKS TO | 特别感谢**
 > 
@@ -59,6 +69,6 @@ To pack into an app
 npm run build
 ```
 
-#### [Download Released App](https://github.com/wahao/Electron-iGot/releases)
+#### [下载 | Download Released App](https://github.com/wahao/Electron-iGot/releases)
 
 #### License [MIT](LICENSE.md)
