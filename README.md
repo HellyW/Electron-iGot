@@ -11,7 +11,7 @@ api接口由[iGot开放接口](https://wahao.github.io/Bark-MP-helper/#/zh-cn/)�
 
 ## 软件预览图
 
-<img src="screenshots/WX20200103-142613@2x.png" alt="通知中心" width="200" /><img src="screenshots/WX20200103-142651@2x.png" alt="授权应用" width="200" /><img src="screenshots/WX20200103-142707@2x.png" alt="推送管理" width="200" /><img src="screenshots/WX20200103-142749@2x.png" alt="关于软件" width="200" />
+<img src="https://github.com/wahao/Electron-iGot/blob/master/screenshots/WX20200103-142613@2x.png" alt="通知中心" width="200" /><img src="https://github.com/wahao/Electron-iGot/blob/master/screenshots/WX20200103-142651@2x.png" alt="授权应用" width="200" /><img src="https://github.com/wahao/Electron-iGot/blob/master/screenshots/WX20200103-142707@2x.png" alt="推送管理" width="200" /><img src="https://github.com/wahao/Electron-iGot/blob/master/screenshots/WX20200103-142749@2x.png" alt="关于软件" width="200" />
 
 ## 您可以用它来做
 
