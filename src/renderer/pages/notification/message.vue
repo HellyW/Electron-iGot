@@ -65,9 +65,10 @@
       <div class="url">{{getFormatMessage.body && getFormatMessage.body.url}}</div>
       <Button type="primary" @click="openUrl(getFormatMessage.body && getFormatMessage.body.url)">打开</Button>
     </div>
-    <div style="text-align:center;padding:20px 0;">
-      <img style="width:80%" src="@/assets/code.jpg">
-      <h3>更多参数细节请扫描上方小程序查看</h3>
+    <div v-show="message.webUrl" style="text-align:center;padding:20px 0;">
+      <canvas id="webUrl"></canvas>
+      <h3>扫描上方二维码打开网页版</h3>
+      <h3>分享及查看更多参数细节</h3>
     </div>
     <div class="btns">
       <Button class="btn" long type="error" size="large" @click="deleteEvent">删除该消息</Button>
@@ -80,6 +81,7 @@
   import { api } from '@/api'
   import { shell } from 'electron'
   import moment from 'moment'
+  import QRCode from 'qrcode'
   import navBar from '@/components/navBar'
   export default{
     name: 'message',
@@ -109,6 +111,14 @@
         let self = this
         api.notification.message(this.id).then(obj => {
           self.message = obj.message || {}
+          if (self.message.webUrl) {
+            QRCode.toCanvas(document.getElementById('webUrl'), self.message.webUrl, {
+              errorCorrectionLevel: 'H',
+              type: 'image/jpeg',
+              quality: 0.3,
+              margin: 1
+            })
+          }
         }).catch(() => {
           self.$router.back()
         })

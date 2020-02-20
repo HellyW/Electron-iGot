@@ -1,6 +1,6 @@
 {
   "name": "iGot",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "wahao-mac <wuhaohao1993@outlook.com>",
   "description": "Bark helper client",
   "license": null,
@@ -64,6 +64,7 @@
     "axios": "^0.18.0",
     "moment": "^2.24.0",
     "pusher-js": "^5.0.3",
+    "qrcode": "^1.4.4",
     "underscore": "^1.9.1",
     "view-design": "^4.0.2",
     "vue": "^2.5.16",

@@ -8,6 +8,9 @@ const getVersion = () => {
   return new Promise((resolve, reject) => {
     try {
       request.get(url.version, {
+        params: {
+          st: new Date()
+        }
       }).then(data => {
         resolve(data)
       }).catch(err => {
