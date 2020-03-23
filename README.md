@@ -63,8 +63,9 @@ To pack into an app
 npm run build
 ```
 
-#### [下载 | Download Released App](https://github.com/wahao/Electron-iGot/releases)
+#### [下载 | Download Released App]
 
-##### [下载速度慢，可移步至gitee同步仓库](https://gitee.com/HellyW/Electron-iGot.git)
+> 由于国内github访问较慢，维护发行太难。github仓库仍持续更新代码，1.1.1后版本release将不再更新。 如需下载请移步至[gitee仓库](https://gitee.com/HellyW/Electron-iGot/releases)下载。
+
 
 #### License [MIT](LICENSE.md)
