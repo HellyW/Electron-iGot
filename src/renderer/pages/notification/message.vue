@@ -18,6 +18,7 @@
       text-align: justify;
       user-select: text;
       margin: 20px auto;
+      white-space: pre-line;
     }
     .url-content{
       width: 80%;

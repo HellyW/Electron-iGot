@@ -65,4 +65,6 @@ npm run build
 
 #### [下载 | Download Released App](https://github.com/wahao/Electron-iGot/releases)
 
+##### [下载速度慢，可移步至gitee同步仓库](https://gitee.com/HellyW/Electron-iGot.git)
+
 #### License [MIT](LICENSE.md)

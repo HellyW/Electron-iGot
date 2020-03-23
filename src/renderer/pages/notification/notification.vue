@@ -38,6 +38,7 @@
           color: #7A7A7A;
           text-align: justify;
           user-select: text;
+          white-space: pre-line;
         }
       }
     }

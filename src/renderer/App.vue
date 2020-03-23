@@ -70,21 +70,40 @@
 </template>
 
 <script>
-  import { ipcRenderer } from 'electron'
+  import { ipcRenderer, shell } from 'electron'
+  import { api } from '@/api'
   export default {
     name: 'bark',
     mounted () {
       this.listenIPCEvent()
+      this.updateApp()
     },
     computed: {
       getClass () {
         return process.platform === 'darwin' ? '' : 'windows'
+      },
+      getVersion () {
+        return '1.1.2'
       }
     },
     methods: {
       listenIPCEvent () {
         ipcRenderer.on('getMessage', (event, id) => {
           this.$router.push(`/message/${id}`)
+        })
+      },
+      updateApp () {
+        let self = this
+        api.client.getVersion().then(obj => {
+          if (obj.version.version === this.getVersion) return self.$Message.success('当前已是最新版本')
+          self.$Modal.info({
+            title: `当前最新版本为${obj.version.version}`,
+            content: `该版本主要升级内容为【${obj.version.intro}】旧版本的客户端可能会影响您的使用和体验，建议您尽快完成升级。升级需您手动下载客户端并安装`,
+            okText: '立即下载',
+            onOk: () => {
+              shell.openExternal(`${(obj.version.url && obj.version.url[self.$isMac ? 'mac' : 'win']) || 'https://wahao.github.io/Bark-MP-helper/#/zh-cn/?id=igot-client'}`)
+            }
+          })
         })
       }
     }
