@@ -2,7 +2,7 @@
   .about-us{
     .container{
       text-align: center;
-      padding: 30px 0;
+      padding: 0;
       width: 80%;
       margin: 0 auto;
       .logo{
@@ -43,7 +43,8 @@
       <h3 class="app">iGot</h3>
       <h5 v-if="getVersion" class="version">{{getVersion}}</h5>
       <p class="intro">iGot 是一款免费的聚合推送客户端，提供webhook。支持开发者、IT爱好者接入使用。支持自定义各种个性化场景。脑洞有多大，功能就有多强。期待你的投稿~~</p>
-      <img class="group" src="@/assets/qq.jpeg">
+      <img class="group" src="@/assets/tucao.jpg">
+      <Button class="btn" type="success" long size="large" @click="tucao">交流社区</Button>
       <Button class="btn" type="error" long size="large" @click="updateApp">检查更新</Button>
       <Button class="btn" type="warning" long size="large" @click="logout">退出登录</Button>
     </div>
@@ -64,7 +65,7 @@
     },
     computed: {
       getVersion () {
-        return '1.1.2'
+        return '1.1.3'
       }
     },
     methods: {
@@ -81,6 +82,9 @@
             }
           })
         })
+      },
+      tucao () {
+        shell.openExternal('https://support.qq.com/product/111465')
       },
       logout () {
         let self = this

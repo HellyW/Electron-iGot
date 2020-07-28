@@ -1,4 +1,5 @@
 import { BrowserWindow, ipcMain } from 'electron'
+import { menu } from './menu'
 
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
@@ -20,4 +21,8 @@ ipcMain.on('addExperience', event => {
     }
   })
   win.addExperience.loadURL(`${winURL}/#/aboutus`)
+})
+
+ipcMain.on('contextMenu', () => {
+  menu.initContextMenu()
 })

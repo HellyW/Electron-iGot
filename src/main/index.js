@@ -1,94 +1,105 @@
-import { app, BrowserWindow, ipcMain, Notification } from 'electron'
+import {
+    app,
+    BrowserWindow,
+    ipcMain,
+    Notification
+} from 'electron'
 import Pusher from 'pusher-js'
+import { menu } from './menu'
 
 // 创建一个订阅消息
 let pusher = new Pusher('6d7d70859379fa308fb0', {
-  cluster: 'ap3',
-  forceTLS: true
+    cluster: 'ap3',
+    forceTLS: true
 })
 let channel = null
-/**
- * Set `__static` path to static files in production
- * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
- */
+let channelToken = null
+    /**
+     * Set `__static` path to static files in production
+     * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
+     */
 if (process.env.NODE_ENV !== 'development') {
-  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
+    global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
 
 let mainWindow
-const winURL = process.env.NODE_ENV === 'development'
-  ? `http://localhost:9080`
-  : `file://${__dirname}/index.html`
+const winURL = process.env.NODE_ENV === 'development' ? `http://localhost:9080` : `file://${__dirname}/index.html`
 
 function createWindow () {
-  /**
-   * Initial window options
-   */
-  mainWindow = new BrowserWindow({
-    width: 420,
-    height: 780,
-    frame: false,
-    titleBarStyle: 'hiddenInset',
-    resizable: false,
-    fullscreen: false,
-    useContentSize: true,
-    webPreferences: {
-      webSecurity: false
-    }
-  })
+    /**
+     * Initial window options
+     */
+    mainWindow = new BrowserWindow({
+        width: 420,
+        height: 780,
+        frame: false,
+        titleBarStyle: 'hiddenInset',
+        resizable: false,
+        fullscreen: false,
+        useContentSize: true,
+        webPreferences: {
+            webSecurity: false
+        }
+    })
 
-  mainWindow.loadURL(winURL, {
-    userAgent: `${mainWindow.webContents.session.getUserAgent()} ${app.getName()}/${app.getVersion()}`
-  })
+    mainWindow.loadURL(winURL, {
+        userAgent: `${mainWindow.webContents.session.getUserAgent()} ${app.getName()}/${app.getVersion()}`
+    })
 
-  mainWindow.on('closed', () => {
-    mainWindow = null
-  })
+    mainWindow.on('closed', () => {
+        mainWindow = null
+    })
 }
 
-app.on('ready', createWindow)
+app.on('ready', () => {
+    createWindow()
+    // console.log(menu)
+    menu.initMenu()
+    // const mainMenu = Menu.buildFromTemplate(Menus)
+    // Menu.setApplicationMenu(mainMenu)
+})
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
 })
 
 app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow()
-  }
+    if (mainWindow === null) {
+        createWindow()
+    }
 })
 
 // 系统及操作 -  最小化  和  关闭应用
 ipcMain.on('hiddenApp', event => {
-  mainWindow && mainWindow.minimize()
+    mainWindow && mainWindow.minimize()
 })
 
 ipcMain.on('closeApp', event => {
-  app.quit()
+    app.quit()
 })
 
 // IPC Event
 ipcMain.on('subscribe', (event, token) => {
-  // 订阅专属频道
-  if (!Notification.isSupported()) return
-  if (!channel) channel = pusher.subscribe(token)
-  channel.bind('notification', data => {
-    if (typeof data === 'string') data = JSON.stringify(data)
-    let notification = new Notification({
-      title: data.app ? data.app : data.title,
-      subtitle: data.app ? (data.title || '') : '',
-      body: data.content,
-      silent: true
+    // 订阅专属频道
+    if (!Notification.isSupported()) return
+    if (!channel && (!channelToken || channelToken !== token)) channel = pusher.subscribe(token)
+    channel.bind('notification', data => {
+        if (typeof data === 'string') data = JSON.stringify(data)
+        let notification = new Notification({
+            title: data.app ? data.app : data.title,
+            subtitle: data.app ? (data.title || '') : '',
+            body: data.content,
+            silent: true
+        })
+        notification.show()
+        mainWindow.webContents.send('message')
+        notification.on('click', () => {
+            mainWindow.restore()
+            mainWindow.webContents.send('getMessage', data.id)
+        })
     })
-    notification.show()
-    mainWindow.webContents.send('message')
-    notification.on('click', () => {
-      mainWindow.restore()
-      mainWindow.webContents.send('getMessage', data.id)
-    })
-  })
 })
 
 /**
@@ -111,4 +122,4 @@ app.on('ready', () => {
 })
  */
 
- require('./ipcNetEvent')
+require('./ipcNetEvent')

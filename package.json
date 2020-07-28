@@ -1,6 +1,6 @@
 {
   "name": "iGot",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "author": "wahao-mac <wuhaohao1993@outlook.com>",
   "description": "Bark helper client",
   "license": null,
@@ -133,7 +133,7 @@
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.15.1",
     "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.4",
+    "webpack-dev-server": "^3.11.0",
     "webpack-hot-middleware": "^2.22.2",
     "webpack-merge": "^4.1.3"
   }

@@ -76,6 +76,7 @@
     name: 'bark',
     mounted () {
       this.listenIPCEvent()
+      this.listenPageEvent()
       this.updateApp()
     },
     computed: {
@@ -90,6 +91,13 @@
       listenIPCEvent () {
         ipcRenderer.on('getMessage', (event, id) => {
           this.$router.push(`/message/${id}`)
+        })
+      },
+      listenPageEvent () {
+        document.addEventListener('contextmenu', event => {
+            // 右键事件触发
+            event.preventDefault()
+            ipcRenderer.send('contextMenu')
         })
       },
       updateApp () {

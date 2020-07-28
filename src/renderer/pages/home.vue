@@ -117,18 +117,16 @@
       <router-view></router-view>
     </div>
     <!-- 悬浮 提示框 -->
-    <div v-if="showAD" class="fixed-xcx-tips">
+    <div v-if="showAD && getAD" class="fixed-xcx-tips">
       <div class="xcx-tips">
         
-        <div class="xcx-intro">
-          <p>打开并收藏小程序</p>
-          <p>随时随地查看消息</p>
+        <div class="xcx-intro" v-html="getAD.intro">
         </div>
-        <div class="btn">
-          <div class="xcx-img">
-            <img src="@/assets/code.jpg">
+        <div class="btn" @click="redirect">
+          <div v-if="getAD.type==='float-tips'" class="xcx-img">
+            <img :src="getAD.url">
           </div>
-          查看
+          {{getAD.btn}}
         </div>
       </div>
     </div>
@@ -137,17 +135,33 @@
 
 <script>
   import { MENUS } from '../router/router'
-  import { ipcRenderer } from 'electron'
+  import { ipcRenderer, shell } from 'electron'
   export default {
     name: 'home',
     data () {
       return {
-        showAD: true
+        showAD: true,
+        adIndex: 0,
+        adInterval: null,
+        ads: [{
+          intro: '<p>打开并收藏小程序</p><p>随时随地查看消息</p>',
+          type: 'float-tips',
+          btn: '查看',
+          url: require('@/assets/code.jpg')
+        }, {
+          intro: '<p>用的爽不爽</p><p>这里来吐槽</p>',
+          type: 'redirect-web',
+          btn: '去吐槽',
+          url: 'https://support.qq.com/embed/phone/111465'
+        }]
       }
     },
     components: {
     },
     computed: {
+      getAD () {
+        return this.ads[this.adIndex]
+      },
       getMenus () {
         return MENUS
       },
@@ -157,6 +171,14 @@
         } : {
           flexDirection: 'row-reverse'
         }
+      }
+    },
+    mounted () {
+      let self = this
+      if (!this.adInterval) {
+        this.adInterval = setInterval(() => {
+          self.adIndex = self.adIndex >= self.ads.length - 1 ? 0 : ++self.adIndex
+        }, 5000)
       }
     },
     methods: {
@@ -169,6 +191,11 @@
       },
       closeAppEvent () {
         ipcRenderer.send('closeApp')
+      },
+      redirect () {
+        const enableTypes = ['redirect-web', 'redirect-router']
+        if (!this.ad.type || enableTypes.indexOf(this.ad.type) === -1 || !this.ad.url) return
+        shell.openExternal(this.ad.url)
       }
     }
   }
