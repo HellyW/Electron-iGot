@@ -40,7 +40,7 @@
     <div class="login-box">
       <img class="login-code" src="../assets/login-code.jpg">
       <h3 class="login-guide">请使用微信扫一扫</h3>
-      <p class="login-tips">请输入手机端生成的六位随机登陆码</p>
+      <p class="login-tips">请输入手机端生成的六位随机登录码</p>
       <login-code v-model="code" class="login-input" @confirm="login"></login-code>
     </div>
   </div>
