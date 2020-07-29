@@ -38,7 +38,7 @@ function createWindow () {
         fullscreen: false,
         useContentSize: true,
         webPreferences: {
-            webSecurity: false
+            nodeIntegration: true
         }
     })
 

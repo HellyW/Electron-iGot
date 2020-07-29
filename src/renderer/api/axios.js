@@ -43,8 +43,8 @@ ajaxMethod.forEach((method) => {
                 resolve(res.data)
             }).catch((res) => {
                 const returnRetRegx = /^3\d{2}$/
-                Message.error(res.errMsg)
-                if (returnRetRegx.test(res.ret.toString())) {
+                Message.error(res.errMsg || res.message || '网络错误')
+                if (res.ret && returnRetRegx.test(res.ret.toString())) {
                     setTimeout(() => {
                         Router.push('/')
                     }, 1000)
