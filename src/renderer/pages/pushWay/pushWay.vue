@@ -50,11 +50,11 @@
       <div class="push-ways">
         <div class="guide">
           <div class="guide-text" style="font-weight:800">拖拽可调整推送顺序</div>
-          <div class="guide-text">当前将按照<span v-for="order,index in orders" :key="index" style="font-weight:800">{{ways[order]}}{{index!==orders.length-1 ? '、' : ''}}</span>顺序依次向您推送消息。所有方式均无法送达时，需要您登陆小程序及第三方客户端查看。</div>
+          <div class="guide-text">当前将按照<span v-for="order,index in orders" :key="'sx'+index" style="font-weight:800">{{ways[order]}}{{index!==orders.length-1 ? '、' : ''}}</span>顺序依次向您推送消息。所有方式均无法送达时，需要您登陆小程序及第三方客户端查看。</div>
         </div>
         <draggable v-model="orders" @change="changeOrders">
           <transition-group>
-            <div v-for="order,index in orders" class="card" :key="index">
+            <div v-for="order,index in orders" class="card" :key="'order'+index">
                 <div class="app">
                   <Icon :custom="'iconfont icon-push-way-'+order" size="25"></Icon>
                   <span style="font-weight:800">{{ways[order]}}</span>
