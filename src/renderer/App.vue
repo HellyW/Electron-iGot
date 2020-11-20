@@ -64,28 +64,20 @@
   }
 </style>
 <template>
-  <div id="app" :class="getClass">
+  <div id="app" :class="$isMac">
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import { ipcRenderer, shell } from 'electron'
-  import { api } from '@/api'
+  import { ipcRenderer } from 'electron'
   export default {
-    name: 'bark',
+    name: 'iGot',
     mounted () {
       this.listenIPCEvent()
       this.listenPageEvent()
-      this.updateApp()
     },
     computed: {
-      getClass () {
-        return process.platform === 'darwin' ? '' : 'windows'
-      },
-      getVersion () {
-        return '1.1.2'
-      }
     },
     methods: {
       listenIPCEvent () {
@@ -98,20 +90,6 @@
             // 右键事件触发
             event.preventDefault()
             ipcRenderer.send('contextMenu')
-        })
-      },
-      updateApp () {
-        let self = this
-        api.client.getVersion().then(obj => {
-          if (obj.version.version === this.getVersion) return self.$Message.success('当前已是最新版本')
-          self.$Modal.info({
-            title: `当前最新版本为${obj.version.version}`,
-            content: `该版本主要升级内容为【${obj.version.intro}】旧版本的客户端可能会影响您的使用和体验，建议您尽快完成升级。升级需您手动下载客户端并安装`,
-            okText: '立即下载',
-            onOk: () => {
-              shell.openExternal(`${(obj.version.url && obj.version.url[self.$isMac ? 'mac' : 'win']) || 'https://wahao.github.io/Bark-MP-helper/#/zh-cn/?id=igot-client'}`)
-            }
-          })
         })
       }
     }

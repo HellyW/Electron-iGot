@@ -1,5 +1,6 @@
 import { BrowserWindow, ipcMain } from 'electron'
 import { menu } from './menu'
+import { version } from './version'
 
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
@@ -25,4 +26,8 @@ ipcMain.on('addExperience', event => {
 
 ipcMain.on('contextMenu', () => {
   menu.initContextMenu()
+})
+
+ipcMain.on('appUpdate', () => {
+  version.update()
 })

@@ -2,7 +2,8 @@ import {
     app,
     BrowserWindow,
     ipcMain,
-    Notification
+    Notification,
+    clipboard
 } from 'electron'
 import Pusher from 'pusher-js'
 import { menu } from './menu'
@@ -86,6 +87,7 @@ ipcMain.on('subscribe', (event, token) => {
     if (!Notification.isSupported()) return
     if (!channel && (!channelToken || channelToken !== token)) channel = pusher.subscribe(token)
     channel.bind('notification', data => {
+        mainWindow.webContents.send('message')
         if (typeof data === 'string') data = JSON.stringify(data)
         let notification = new Notification({
             title: data.app ? data.app : data.title,
@@ -94,7 +96,7 @@ ipcMain.on('subscribe', (event, token) => {
             silent: true
         })
         notification.show()
-        mainWindow.webContents.send('message')
+        clipboard.writeText(data.content)
         notification.on('click', () => {
             mainWindow.restore()
             mainWindow.webContents.send('getMessage', data.id)
